@@ -1,0 +1,20 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "cjbarrie-claude-plugins",
+  "description": "Claude Code plugins by Christopher Barrie",
+  "owner": {
+    "name": "Christopher Barrie"
+  },
+  "plugins": [
+    {
+      "name": "academic-review",
+      "description": "Academic manuscript review tools: peer review manuscripts, parse revision demands, and verify revision responses",
+      "author": {
+        "name": "Christopher Barrie"
+      },
+      "source": "./plugins/academic-review",
+      "category": "productivity",
+      "homepage": "https://github.com/cjbarrie/claude-plugins/tree/main/plugins/academic-review"
+    }
+  ]
+}
