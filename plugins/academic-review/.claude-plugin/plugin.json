@@ -1,0 +1,5 @@
+{
+  "name": "academic-review",
+  "description": "Academic manuscript review tools: review manuscripts, analyze revision requests, and verify revision responses",
+  "author": { "name": "Christopher Barrie" }
+}
