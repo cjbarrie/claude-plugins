@@ -1,7 +1,7 @@
 ---
 description: Parse and itemize reviewer revision requests from a decision letter PDF
 argument-hint: <reviewer-comments.pdf> [--journal <name>]
-allowed-tools: ["Read", "Task"]
+allowed-tools: ["Read", "Bash", "Task"]
 model: sonnet
 ---
 
@@ -21,10 +21,18 @@ Extract from `$ARGUMENTS`:
 
 ### 2. Read the PDF
 
-Use the `Read` tool to read the PDF in chunks:
-- Start with pages 1–20
-- If content is clearly incomplete (reviewer comments are cut off, not all reviewers present), continue in 20-page chunks
-- Note reviewer labels (Reviewer 1, Reviewer 2, Editor, etc.) and page locations as you read
+First, ensure `pdftotext` is available. Use the `Bash` tool to check and install if needed:
+```bash
+which pdftotext || (brew install poppler 2>/dev/null || apt-get install -y poppler-utils 2>/dev/null)
+```
+
+Then extract the full text using the `Bash` tool:
+```bash
+pdftotext "/path/to/comments.pdf" -
+```
+
+- Note reviewer labels (Reviewer 1, Reviewer 2, Editor, etc.) as you read
+- Note any structural markers (numbered concerns, section breaks) that will anchor the itemization
 
 ### 3. Launch the Analyzer Agent
 

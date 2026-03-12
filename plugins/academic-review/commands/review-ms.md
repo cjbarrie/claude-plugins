@@ -1,7 +1,7 @@
 ---
 description: Review a manuscript PDF as an academic peer reviewer
 argument-hint: <manuscript.pdf> [--discipline <field>] [--focus <aspect>]
-allowed-tools: ["Read", "Task"]
+allowed-tools: ["Read", "Bash", "Task"]
 model: sonnet
 ---
 
@@ -22,11 +22,19 @@ Extract from `$ARGUMENTS`:
 
 ### 2. Read the Manuscript
 
-Use the `Read` tool to read the PDF in chunks:
-- Start with pages 1–20
-- Assess whether the content is complete (does it cover abstract through conclusion/references?)
-- If clearly incomplete, continue reading in 20-page chunks until the full manuscript is read
-- Note page numbers and section headings as you read — these will be used for citations in the review
+First, ensure `pdftotext` is available. Use the `Bash` tool to check and install if needed:
+```bash
+which pdftotext || (brew install poppler 2>/dev/null || apt-get install -y poppler-utils 2>/dev/null)
+```
+
+Then extract the full manuscript text using the `Bash` tool:
+```bash
+pdftotext "/path/to/manuscript.pdf" -
+```
+
+- Extract the full text in one pass — `pdftotext` handles the entire document
+- Note section headings and approximate page positions as you read — these will be used for citations in the review
+- If the text appears truncated or garbled, the PDF may be image-based; note this for the agent
 
 ### 3. Launch the Reviewer Agent
 

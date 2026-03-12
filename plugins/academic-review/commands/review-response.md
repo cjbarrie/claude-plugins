@@ -1,7 +1,7 @@
 ---
 description: Verify a revision response memo against original reviewer requests and the revised manuscript
 argument-hint: <response-memo.pdf> <revised-manuscript.pdf> [<original-comments.pdf>]
-allowed-tools: ["Read", "Task"]
+allowed-tools: ["Read", "Bash", "Task"]
 model: sonnet
 ---
 
@@ -22,13 +22,30 @@ Extract from `$ARGUMENTS` in order of appearance:
 
 ### 2. Read All PDFs in Sequence
 
-Read each document using the `Read` tool, chunking in 20-page increments if needed:
+First, ensure `pdftotext` is available. Use the `Bash` tool to check and install if needed:
+```bash
+which pdftotext || (brew install poppler 2>/dev/null || apt-get install -y poppler-utils 2>/dev/null)
+```
 
-**Step 1 — Response memo:** Read fully before proceeding. Note how many numbered items/responses it contains and any explicit references to the manuscript (page, section, line).
+Then extract each document in order using the `Bash` tool:
 
-**Step 2 — Revised manuscript:** Read fully. Note section headings, page numbers, and any passages that appear to be newly added or substantially revised.
+**Step 1 — Response memo:**
+```bash
+pdftotext "/path/to/memo.pdf" -
+```
+Note how many numbered items/responses it contains and any explicit references to the manuscript (page, section, line).
 
-**Step 3 — Original comments (if provided):** Read fully. Note the exact wording of each reviewer concern — these will be checked against how they are quoted in the response memo.
+**Step 2 — Revised manuscript:**
+```bash
+pdftotext "/path/to/revised.pdf" -
+```
+Note section headings, page numbers, and any passages that appear newly added or substantially revised.
+
+**Step 3 — Original comments (if provided):**
+```bash
+pdftotext "/path/to/comments.pdf" -
+```
+Note the exact wording of each reviewer concern — these will be checked against how they are quoted in the response memo.
 
 ### 3. Launch the Verifier Agent
 
