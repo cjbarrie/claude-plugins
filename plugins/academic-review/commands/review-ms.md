@@ -17,7 +17,7 @@ Perform a full academic peer review of the manuscript PDF provided.
 
 Extract from `$ARGUMENTS`:
 - **PDF path** (required): the manuscript file to review
-- **`--discipline <field>`** (optional): one of `economics`, `sociology`, `political science`, `psychology`, `history`, `methods`. If not provided, use default rubric.
+- **`--discipline <field>`** (optional): one of `economics`, `sociology`, `political science`.
 - **`--focus <aspect>`** (optional): a specific aspect to emphasize (e.g., "methods", "theory", "contribution")
 
 ### 2. Read the Manuscript
@@ -40,7 +40,7 @@ pdftotext "/path/to/manuscript.pdf" -
 
 Use the `Task` tool to launch the `manuscript-reviewer` agent. Pass it:
 - The full text content you have read
-- The discipline flag value (or "default" if none provided)
+- The discipline flag value (or none if not provided)
 - The focus flag value (or "none" if not provided)
 - All page/section references noted during reading
 
@@ -59,10 +59,6 @@ Output the structured review returned by the agent directly to the user.
 
 ## Supported Disciplines
 
-- `economics` — emphasizes identification strategy, external validity, contribution framing
-- `sociology` — emphasizes theoretical framing, reflexivity, generalizability
-- `political science` — emphasizes causal inference, case selection, policy relevance
-- `psychology` — emphasizes pre-registration, effect sizes, measurement validity
-- `history` — emphasizes archival depth, source criticism, interpretive plausibility
-- `methods` — emphasizes technical correctness, reproducibility, benchmarking
-- *(default)* — argument clarity, evidence-claim alignment, methodological transparency, contribution
+- `economics`
+- `sociology`
+- `political science`
